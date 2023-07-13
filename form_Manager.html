@@ -12,6 +12,9 @@
             </div>
             <div if:true={showTable}>
                 <h2>Account Name: <span><strong>{currentAccountName}</strong></span></h2><br />
+                <div class="slds-p-bottom_medium">
+                    <h2>Numer of Contacts: <span><strong>{contactSize}</strong></span></h2><br />
+                </div>
                 <h3><strong><span style="color:brown;">{dataNotFound}</span></strong></h3><br />
                 <h2 class="slds-m-bottom--x-small" style="color:darkslateblue; font-weight:bold;">Displaying Contacts Records based on Account Name</h2>
                 <table class="slds-table slds-table_cell-buffer slds-table_bordered" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
@@ -37,6 +40,7 @@
             </div>
             <div if:true={showContactTable}>
                 <h2>Contact Name: <span><strong>{currentAccountName}</strong></span></h2><br />
+                <h2>Numer of Contacts: <span><strong>{contactSize}</strong></span></h2><br />
                 <h3><strong><span style="color:brown;">{dataNotFound}</span></strong></h3><br />
                 <h2 class="slds-m-bottom--x-small" style="color:darkslateblue; font-weight:bold;">Displaying Searched Contacts</h2>
                 <table class="slds-table slds-table_cell-buffer slds-table_bordered" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
@@ -49,12 +53,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <template for:each={Result} for:item="con">
-                            <tr key={con.Id}>
-                                <td>{con.FirstName}</td>
-                                <td>{con.LastName}</td>
-                                <td>{con.Phone}</td>
-                                <td>{con.Name}</td>
+                        <template for:each={Result} for:item="conItems">
+                            <tr key={conItems.Id}>
+                                <td>{conItems.FirstName}</td>
+                                <td>{conItems.LastName}</td>
+                                <td>{conItems.Phone}</td>
+                                <td>{conItems.Name}</td>
                             </tr>
                         </template>
                     </tbody>
