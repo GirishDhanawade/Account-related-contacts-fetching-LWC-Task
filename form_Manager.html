@@ -1,30 +1,26 @@
 <template>
-    <lightning-card title="Display the Contacts based on Account Name in LWC" custom-icon="custom:icon13">
+    <lightning-card title="Display the Contacts related to the Account Name Or Display Contacts only" custom-icon="custom:icon13">
         <div class="slds slds-p-horizontal--medium">
             <div class="slds-grid slds-wrap">
-                <div class="slds-col slds-size_4-of-12 slds-m-bottom--medium">
-                    <lightning-Input type="search" placeholder="Search..." value={accountName} name="accountName"
-                        class="accountName" onchange={handleChangeAccName}></lightning-input>
-                </div>
-                <div class="slds-col slds-size_6-of-12 slds-m-top--medium" style="margin-top: 19px; margin-left: 10px;">
-                    <lightning-button label="Search Account" size="small" variant="brand"
-                        onclick={handleAccountSearch} icon-name="utility:search"
-                        icon-position="right"></lightning-button>
+                <div class="slds-col slds-size_4-of-12 slds-m-bottom--medium" style="display: inline-block;">
+                    <lightning-input type="search" placeholder="Enter Account Name..." value={accountName} name="accountName" class="accountName" onchange={handleChangeAccName}></lightning-input>
+                </div>&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="slds-col slds-size_6-of-12 slds-m-top--medium" style="display: inline-block;">
+                    <lightning-button label="Search Related Contacts" size="small" variant="brand" onclick={handleAccountSearch} icon-name="utility:search" icon-position="left"></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <lightning-button label="Search Contacts Only" size="small" variant="brand" onclick={handleContactSearch} icon-name="utility:search" icon-position="left"></lightning-button>
                 </div>
             </div>
             <div if:true={showTable}>
-                <h2>Account Name :- <span><strong>{currentAccountName}</strong></span></h2><br />
+                <h2>Account Name: <span><strong>{currentAccountName}</strong></span></h2><br />
                 <h3><strong><span style="color:brown;">{dataNotFound}</span></strong></h3><br />
-                <h2 class="slds-m-bottom--x-small" style="color:darkslateblue; font-weight:bold;">Displaying Contacts
-                    Records based on Account Name</h2>
-                <table class="slds-table slds-table_cell-buffer slds-table_bordered" border="1" cellspacing="0"
-                    cellpadding="0" style="border-collapse:collapse;">
+                <h2 class="slds-m-bottom--x-small" style="color:darkslateblue; font-weight:bold;">Displaying Contacts Records based on Account Name</h2>
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
                     <thead>
                         <tr>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Phone</th>
-                            <th>Description</th>
+                            <th>Account Name</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,7 +34,32 @@
                         </template>
                     </tbody>
                 </table>
-            </div>      
+            </div>
+            <div if:true={showContactTable}>
+                <h2>Contact Name: <span><strong>{currentAccountName}</strong></span></h2><br />
+                <h3><strong><span style="color:brown;">{dataNotFound}</span></strong></h3><br />
+                <h2 class="slds-m-bottom--x-small" style="color:darkslateblue; font-weight:bold;">Displaying Searched Contacts</h2>
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Phone</th>
+                            <th>Contact Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={Result} for:item="con">
+                            <tr key={con.Id}>
+                                <td>{con.FirstName}</td>
+                                <td>{con.LastName}</td>
+                                <td>{con.Phone}</td>
+                                <td>{con.Name}</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <br /><br />
     </lightning-card>
