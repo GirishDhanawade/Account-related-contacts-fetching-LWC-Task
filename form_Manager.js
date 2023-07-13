@@ -6,6 +6,7 @@ export default class DisplayContactsOnAccountName extends LightningElement {
     @track currentAccountName;
     @track searchName;
     @track searchContactName;
+    @track contactSize;
     @track showTable = false;
     @track showContactTable = false;
     handleChangeAccName(event) {
@@ -31,7 +32,9 @@ export default class DisplayContactsOnAccountName extends LightningElement {
                     console.log('Result', JSON.stringify(result));
                     this.records = result;
                     if (this.records != null && this.records.length > 0) {
+                        this.contactSize = this.records.length;
                         this.showTable = true;
+                        this.showContactTable = false;
                     } else {
                         this.showErrorToast('This account doesn\'t have any related contacts');
                     }
@@ -58,9 +61,13 @@ export default class DisplayContactsOnAccountName extends LightningElement {
                     console.log('Result', JSON.stringify(result));
                     this.Result = result;
                     if (this.Result != null && this.Result.length > 0) {
+                        this.contactSize = this.Result.length;
                         this.showContactTable = true;
+                        this.showTable = false;
                     } else {
                         this.showErrorToast('There is no any contact with this name');
+                        this.showContactTable = false;
+                        this.showTable = false;
                     }
                     resolve(result);
                 })
