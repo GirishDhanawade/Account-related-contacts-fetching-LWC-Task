@@ -8,7 +8,7 @@ public with sharing class fetchRelatedRecords {
 
     @AuraEnabled
     public static List<Contact> retrieveOnlyContactData(string searchContactName){
-    List<Contact> mycontactListOnly = [Select Id, FirstName, LastName, Email, Phone, Name From Contact Where LastName=:searchContactName];
+    List<Contact> myContactListOnly = [SELECT Id, FirstName, LastName, Email, Phone, Name FROM Contact WHERE FirstName = :searchContactName OR LastName = :searchContactName];
     if(mycontactListOnly.size() == 0)
     {
         System.debug('No data found');
